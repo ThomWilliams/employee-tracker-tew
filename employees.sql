@@ -13,11 +13,10 @@ CREATE TABLE departments (
 CREATE TABLE roles (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(30) NOT NULL,
-  salary DECIMAL(10,2) NOT NULL,
+  salary MONEY(10,2) NOT NULL,
   departments_id INT NOT NULL,
   PRIMARY KEY (id)
 );
-
 
 CREATE TABLE employees (
   id INT NOT NULL AUTO_INCREMENT,
@@ -27,6 +26,16 @@ CREATE TABLE employees (
   manager_id INT NOT NULL,
   PRIMARY KEY (id)
 );
+
+INSERT INTO departments (name)
+VALUES ("Front End")
+
+INSERT INTO roles (title, salary)
+VALUES ("Developer", 23000.00)
+
+INSERT INTO employees (first_name, last_name)
+VALUES ("Thom", "Williams")
+
 
 SELECT * FROM departments;
 SELECT * FROM roles;

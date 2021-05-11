@@ -10,3 +10,7 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'y
 mysql> FLUSH PRIVILEGES;
 mysql> quit
 Then try connecting using node
+
+USE THIS INSTEAD OF SQL WORKBENCH?
+
+https://sqliteonline.com/
