@@ -1,0 +1,23 @@
+{
+  "name": "employee-tracker-tew",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomWilliams/employee-tracker-tew.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomWilliams/employee-tracker-tew/issues"
+  },
+  "homepage": "https://github.com/ThomWilliams/employee-tracker-tew#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "mysql": "^2.18.1"
+  }
+}
