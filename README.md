@@ -1,6 +1,7 @@
 
 Full Steps For launching MySQL 8 in the terminal
 Connect to MySQL
+$ export PATH="${PATH}:/usr/local/mysql/bin/"
 $ mysql -u root -p
 Enter password: (enter your root password)
 Reset your password
