@@ -70,7 +70,7 @@ const runSearch = () => {
 // SELECT TABLE TO ADD DATA TO 
 const addData = () => {
   inquirer.prompt({
-    name: 'action',
+    name: 'table',
     type: 'rawlist',
     message: 'What would you like to add data to?',
     choices: [
@@ -81,7 +81,7 @@ const addData = () => {
     ],
   })
   .then((answer) => {
-    switch (answer.action) {
+    switch (answer.table) {
       case 'Add departments':
         addDepartmentData();
         break;
@@ -99,17 +99,109 @@ const addData = () => {
           break;
 
       default:
-        console.log(`Invalid action: ${answer.action}`);
+        console.log(`Invalid action: ${answer.table}`);
         break;
     }
   });
 };
 
-// ADD DEPARTMENT DATA INQUIRER
-// ADD EMPLOYEE DATA INQUIRER
-// ADD ROLES DATA INQUIRER
-// ADD DATA INQUIRER
+// ADD DEPARTMENT DATA
+const addDepartmentData = () => {
+  inquirer.prompt({
+    name: 'departmentID',
+    type: 'input',
+    message: 'Please enter the ID code for the department',
+  },
+  {
+    name: 'departmentName',
+    type: 'input',
+    message: 'Please enter the Name of the department',
+  })
+  .then((answer) => {
+    const departmentData = new departmentEntry(
+      answer.departmentID,
+      answer.departmentName,
+    );
+    console.log(departmentData)
+      addRoleData()
+  });
+};
 
-// LATER... INQUIRERS FOR
+// ADD ROLES DATA 
+
+const addRolesData = () => {
+  inquirer.prompt({
+    name: 'rolesID',
+    type: 'input',
+    message: 'Please enter the ID code for the role in question',
+  },
+  {
+    name: 'rolesTitle',
+    type: 'input',
+    message: 'Please enter the title of the role',
+  },
+  {
+    name: 'rolesSalary',
+    type: 'input',
+    message: 'Please enter the salary for this role',
+  }, 
+  {
+    name: 'rolesDepartmentID',
+    type: 'rawlist',
+    message: 'Please enter the Department ID code for this role',
+  })
+  .then((answer) => {
+    const rolesData = new rolesEntry(
+      answer.rolesID,
+      answer.rolesTitle,
+      answer.rolesSalary,
+      answer.rolesDepartmentID,
+    );
+    console.log(rolesData)
+      addEmployeeData()
+  });
+};
+
+
+// ADD EMPLOYEE DATA INQUIRER
+const addEmployeeData = () => {
+  inquirer.prompt({
+    name: 'employeeID',
+    type: 'input',
+    message: 'Please enter the ID code for the Employee',
+  },
+  {
+    name: 'employeeFirstName',
+    type: 'input',
+    message: 'Please enter the First Name of the Employee',
+  }, 
+  {
+    name: 'employeeLastName',
+    type: 'input',
+    message: 'Please enter the Last Name of the Employee',
+  }, 
+  {
+    name: 'employeeRolesID',
+    type: 'input',
+    message: 'Please enter the ID for this Employees role',
+  }
+  )
+  .then((answer) => {
+    const employeeData = new employeeEntry(
+      answer.employeeID,
+      answer.employeeFirstName,
+      answer.employeeLastName,
+      answer.employeeRolesID,
+      answer.employeeManagerID,
+    );
+    console.log(employeeData)
+      addEmployeeData()
+  });
+};
+
+
+
+
+// LATER... SEARCH INQUIRERS FOR
 // VIEW DEPARTMENTS / EMPLOYEES / ROLES DATA 
 // UPDATE DEPARTMENTS / EMPLOYEES / ROLES DATA 
