@@ -28,7 +28,7 @@ connection.connect((err) => {
 
 
 // SELECT TABLE TO ADD DATA TO 
-const runSearch = () => {
+const start = () => {
   inquirer
     .prompt({
       name: 'action',
@@ -105,37 +105,36 @@ const addData = () => {
   });
 };
 
-// ADD DEPARTMENT DATA
+
+
+// CREATE / ADD DEPARTMENT DATA
 const addDepartmentData = () => {
   inquirer.prompt({
-    name: 'departmentID',
-    type: 'input',
-    message: 'Please enter the ID code for the department',
-  },
-  {
     name: 'departmentName',
     type: 'input',
     message: 'Please enter the Name of the department',
   })
   .then((answer) => {
-    const departmentData = new departmentEntry(
-      answer.departmentID,
-      answer.departmentName,
-    );
-    console.log(departmentData)
-      addRoleData()
+    connection.query(
+     'INSERT INTO departments SET ?',
+     { 
+       name: answer.departmentName,
+     },
+     (err, res) => {
+      if (err) throw err;
+      console.log('Department Name Added to Database!');
+      // re-prompt the user if they want to go through options again
+      start();
+    }
+  );
   });
-};
+}
+  
 
-// ADD ROLES DATA 
+// CREATE / ADD ROLES DATA 
 
 const addRolesData = () => {
   inquirer.prompt({
-    name: 'rolesID',
-    type: 'input',
-    message: 'Please enter the ID code for the role in question',
-  },
-  {
     name: 'rolesTitle',
     type: 'input',
     message: 'Please enter the title of the role',
@@ -147,19 +146,26 @@ const addRolesData = () => {
   }, 
   {
     name: 'rolesDepartmentID',
-    type: 'rawlist',
+    type: 'input',
     message: 'Please enter the Department ID code for this role',
   })
   .then((answer) => {
-    const rolesData = new rolesEntry(
-      answer.rolesID,
-      answer.rolesTitle,
-      answer.rolesSalary,
-      answer.rolesDepartmentID,
-    );
-    console.log(rolesData)
-      addEmployeeData()
+    connection.query(
+     'INSERT INTO departments SET ?',
+     { 
+        title: answer.rolesTitle,
+        salary: answer.rolesSalary,
+        departments_id: answer.rolesDepartmentID,
+     },
+     (err, res) => {
+      if (err) throw err;
+      console.log('Roles data Added to Database!');
+      // re-prompt the user if they want to go through options again
+      start();
+    }
+  );
   });
+ 
 };
 
 
@@ -187,21 +193,39 @@ const addEmployeeData = () => {
   }
   )
   .then((answer) => {
-    const employeeData = new employeeEntry(
-      answer.employeeID,
-      answer.employeeFirstName,
-      answer.employeeLastName,
-      answer.employeeRolesID,
-      answer.employeeManagerID,
-    );
-    console.log(employeeData)
-      addEmployeeData()
+    connection.query(
+     'INSERT INTO departments SET ?',
+     { 
+      first_name: answer.employeeFirstName,
+      last_name: answer.employeeLastName,
+      roles_id: answer.employeeRolesID,
+      manager_id: answer.employeeManagerID,
+     },
+     (err, res) => {
+      if (err) throw err;
+      console.log('Employees data Added to Database!');
+  
+      // re-prompt the user if they want to go through options again
+      start();
+    }
+  );
   });
 };
 
+start();
+
+// TO DO...
+
+// CREATE - Get the Add Data working...
+
+// READ or "SEARCH INQUIRERS FOR - VIEW DEPARTMENTS / EMPLOYEES / ROLES DATA"
+
+// UPDATE -  DEPARTMENTS / EMPLOYEES / ROLES DATA 
 
 
 
-// LATER... SEARCH INQUIRERS FOR
-// VIEW DEPARTMENTS / EMPLOYEES / ROLES DATA 
-// UPDATE DEPARTMENTS / EMPLOYEES / ROLES DATA 
+// THINK OF C.R.U.D. 
+// SEE activities 9 and 10
+// * Add departments, roles, employees
+// * View departments, roles, employees
+// * Update employee roles
