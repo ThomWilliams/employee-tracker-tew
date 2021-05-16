@@ -266,6 +266,52 @@ const viewEmployeeData = () => {
   start();
 };
 
+const updateEmployeeRoles = () => {
+  let employeeID;
+  let roleId; 
+
+  connection.query("SELECT * FROM employees", (err, results) => {
+    if(err)throw err; 
+     inquirer.prompt([
+      {
+        name: "employee_id",
+        type: "list",
+        choices() {
+          return results.map(({ id, first_name, last_name }) => {
+            return { name: first_name + last_name, value: id };
+          });
+        },
+        message: "Which employee would you  like to update?"
+      }
+    ]).then(({employee_id}) => {
+      employeeID = employee_id; 
+      connection.query("SELECT * FROM roles", (err, results) => {
+       if(err)throw err; 
+        inquirer.prompt([
+         {
+           name: "role_id",
+           type: "list",
+           choices() {
+             return results.map(({ id, title }) => {
+               return { name: title, value: id };
+             });
+           },
+           message: "Which new role would you like to give this employee??"
+         }
+       ]).then(({role_id}) => {
+         console.log("roles", role_id)
+         roleId = role_id; 
+       })
+     })
+    }).then(() => {
+
+      console.log(employeeID, roleId)
+      connection.query("UPDATE employees SET roles_id = ? WHERE id = ?", [roleId, employeeID])
+    })
+ })
+
+}
+
 // UPDATE EMPOYEE ROLES ID
 // const updateEmployeeRoles = () => {
 //   connection.query('SELECT * FROM employees', (err, results) => {

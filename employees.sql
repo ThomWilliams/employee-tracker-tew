@@ -27,15 +27,6 @@ CREATE TABLE employees (
   PRIMARY KEY (id)
 );
 
-INSERT INTO departments (name)
-VALUES ("Front End")
-
-INSERT INTO roles (title, salary, departments_id)
-VALUES ("Developer", 25000.00, 2832)
-
-INSERT INTO employees (first_name, last_name, roles_id, manager_id)
-VALUES ("Thom", "Williams", 7575, 8274823)
-
 
 SELECT * FROM departments;
 SELECT * FROM roles;
