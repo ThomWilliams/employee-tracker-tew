@@ -70,7 +70,7 @@ const start = () => {
 // SELECT TABLE TO ADD DATA TO 
 const addData = () => {
   inquirer.prompt({
-    name: 'table',
+    name: 'addTable',
     type: 'rawlist',
     message: 'What would you like to add data to?',
     choices: [
@@ -81,7 +81,7 @@ const addData = () => {
     ],
   })
   .then((answer) => {
-    switch (answer.table) {
+    switch (answer.addTable) {
       case 'Add departments':
         addDepartmentData();
         break;
@@ -208,6 +208,44 @@ const addEmployeeData = () => {
   });
 };
 
+// VIEW / READ TABLE DATA SELECTOR
+
+const viewData = () => {
+  inquirer.prompt({
+    name: 'viewTable',
+    type: 'rawlist',
+    message: 'Which table would you like to view?',
+    choices: [
+      'View departments',
+      'View roles',
+      'View employees',
+      'Exit',
+    ],
+  })
+  .then((answer) => {
+    switch (answer.viewTable) {
+      case 'View departments table':
+        viewDepartmentData();
+        break;
+
+      case 'View roles table':
+        viewRolesData();
+        break;
+
+      case 'View employees table':
+        viewEmployeeData();
+        break;
+
+      case 'Exit':
+          connection.end();
+          break;
+
+      default:
+        console.log(`Invalid action: ${answer.table}`);
+        break;
+    }
+  });
+};
 
 
 
