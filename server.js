@@ -241,14 +241,63 @@ const viewData = () => {
           break;
 
       default:
-        console.log(`Invalid action: ${answer.table}`);
+        console.log(`Invalid action: ${answer.viewTable}`);
         break;
     }
   });
 };
 
 
+// VIEW DEPARTMENT DATA IN COMMAND LINE
+const viewDepartmentData = () => {
+  connection.query('SELECT * FROM departments', (err, results) => {
+    if (err) throw err;
 
+  }); return console.table(res);
+}
+
+
+// VIEW ROLES DATA IN COMMAND LINE
+
+const viewRolesData = () => {
+  connection.query('SELECT * FROM roles', (err, results) => {
+    if (err) throw err;
+
+  }); return console.table(res);
+}
+
+
+// VIEW EMPLOYEE DATA IN COMMAND LINE
+
+const viewEmployeeData = () => {
+  connection.query('SELECT * FROM employees', (err, results) => {
+    if (err) throw err;
+
+  }); return console.table(res);
+}
+
+
+
+
+
+
+
+
+// const updateEmployeeRoles = () => {
+//   inquirer.prompt({
+//     name: 'updateEmployees',
+//     type: 'rawlist',
+//     message: 'Which employee would you like to update?',
+//     choices: [
+//       // Display Employees data?,
+//       'Exit',
+//     ],
+//   })
+//   .then((answer) => {
+    
+//     }
+//   });
+// };
 
 
 start();
