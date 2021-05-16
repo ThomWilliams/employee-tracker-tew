@@ -268,88 +268,67 @@ const viewEmployeeData = () => {
   start();
 };
 
+
+// UPDATE Employee Roles ID 
 const updateEmployeeRoles = () => {
   let employeeID;
   let roleId;
 
+   // Selects The Employees from Employees Table
   connection.query("SELECT * FROM employees", (err, results) => {
     if (err) throw err;
     inquirer.prompt([{
       name: "employee_id",
       type: "list",
       choices() {
-        return results.map(({
-          id,
-          first_name,
-          last_name
-        }) => {
+        return results.map(({ id, first_name, last_name}) => {
           return {
-            name: first_name + last_name,
-            value: id
+            name: first_name + last_name, value: id
           };
         });
       },
       message: "Which employee would you like to update?"
-    }]).then(({
-      employee_id
-    }) => {
+
+    }]).then(({ employee_id }) => {
       console.log("setting employeeID to ", employee_id)
       employeeID = employee_id;
       console.log("Got employeeID ", employeeID);
-  connection.query("SELECT * FROM roles", (err, results) => {
+  
+      // Selects Role ID from Roles Table
+    connection.query("SELECT * FROM roles", (err, results) => {
     console.log("employeeID", employeeID)
-    if (err) throw err;
-    inquirer.prompt([{
-      name: "role_id",
-      type: "list",
+      if (err) throw err;
+        inquirer.prompt([{
+          name: "role_id",
+          type: "list",
       choices() {
-        return results.map(({
-          id,
-          title
-        }) => {
-          return {
-            name: title,
-            value: id
-          };
+        return results.map(({ id, title }) => {
+        return { name: title, value: id };
         });
       },
       message: "Which new role would you like to give this employee??"
-    }]).then(({
-      role_id
-    }) => {
+
+    }]).then(({ role_id }) => {
       console.log("roles", role_id)
       roleId = role_id;
-      console.log("Update employeeID ", employeeID, " roleId ", roleId)
-  connection.query("UPDATE employees SET roles_id = ? WHERE id = ?", [roleId, employeeID], (err, results) => {
-    if (err) throw err;
-    console.log("Updated role")
+      console.log("Update employeeID ", employeeID, "roleId ", roleId)
+  
+    // Updates Role ID in the Employees Table
+      connection.query("UPDATE employees SET roles_id = ? WHERE id = ?", [roleId, employeeID], (err, results) => {
+      if (err) throw err;
+      console.log("Updated role")
     start();
   });
+
     }).catch(error => {
       console.log("Error selecting roles")
     })
   });
 
     }).catch(error => {
-      console.log("Error selecting emplyees")
+      console.log("Error selecting employees")
     })
   });
-  
 }
 
-
 start();
-
-// TO DO...
-
-// CREATE - Get the Add Data working...
-
-// READ or "SEARCH INQUIRERS FOR - VIEW DEPARTMENTS / EMPLOYEES / ROLES DATA"
-
-// UPDATE -  DEPARTMENTS / EMPLOYEES / ROLES DATA
-
-// THINK OF C.R.U.D.
-// SEE activities 9 and 10
-// * Add departments, roles, employees
-// * View departments, roles, employees
-// * Update employee roles
