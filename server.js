@@ -151,7 +151,7 @@ const addRolesData = () => {
   })
   .then((answer) => {
     connection.query(
-     'INSERT INTO departments SET ?',
+     'INSERT INTO roles SET ?',
      { 
         title: answer.rolesTitle,
         salary: answer.rolesSalary,
@@ -171,11 +171,7 @@ const addRolesData = () => {
 
 // ADD EMPLOYEE DATA INQUIRER
 const addEmployeeData = () => {
-  inquirer.prompt({
-    name: 'employeeID',
-    type: 'input',
-    message: 'Please enter the ID code for the Employee',
-  },
+  inquirer.prompt(
   {
     name: 'employeeFirstName',
     type: 'input',
@@ -189,12 +185,12 @@ const addEmployeeData = () => {
   {
     name: 'employeeRolesID',
     type: 'input',
-    message: 'Please enter the ID for this Employees role',
+    message: 'Please enter the ID for this Employee role',
   }
   )
   .then((answer) => {
     connection.query(
-     'INSERT INTO departments SET ?',
+     'INSERT INTO employees SET ?',
      { 
       first_name: answer.employeeFirstName,
       last_name: answer.employeeLastName,
@@ -212,7 +208,13 @@ const addEmployeeData = () => {
   });
 };
 
+
+
+
+
+
 start();
+
 
 // TO DO...
 
