@@ -1,4 +1,4 @@
-# Note Taker App
+# Employee Tracker
 
 ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -14,11 +14,13 @@
   
 ## Description 
   
-A professional note taker app. The back-end has been built with Express and Node, which provides functionality to the front-end HTML, CSS, Javascript. 
+A professional content management system (CMS) that offers a solution for managing a company's employees and their personal data. It has been built using node, inquirer, and MySQL.
 
-From the index page the user can navigate through to the notes page where they can submit their reminder notes. 
+A series of steps in the command line allow the user to input data for departments, employee roles and for individual employees. 
 
-The user text inputted into the note pad on the right hand column, is then saved as a series of dynamically generated notes in the left hand column upon clicking the "save button". The data is parsed and saved in a JSON file for reference in the application back-end. The UUID NPM package provides each note with a uniquie ID. 
+The data can be viewed in the terminal through the console.table package. 
+
+The employee role can also be updated on the database as necessary.
 
 
 ## Installation
@@ -27,19 +29,18 @@ To install the project please use the following package manager:
   
 enter 'npm init' in the terminal 
 
-enter 'npm install express' to install the express dev dependency
+enter 'npm install mysql' to install the express dev dependency
 
-enter 'npm install uuid' to install the UUID dev dependency
+enter 'npm install table.console' to install the table.console dev dependency
 
-enter 'npm install nodemon' to install the nodemon run time dependency
+enter 'npm install inquirer' to install the inquirer dev dependency
 
-Deployed front-end App also works in a standard browser such as Chrome at the following address: [Homepage](https://thomwilliams.github.io/note-taker-tew/)
   
 ## Usage
   
-Download, install NPM packages, enter node server.js or nodemon server.js to activate server and run the app
+Download, install NPM packages, enter node server.js to activate server and run the app
 
-  
+
 ## Contributing
   
 To contribute further on this project please:
@@ -61,19 +62,18 @@ thomwilliams1990@gmail.com
 
 ## Screenshot
 
-![Screenshot of the Desktop version](./Assets/note-taker-tew_Screenshot.png)
+![Screenshot of requests in the command line](./Assets/employee-tracker.png)
 
-![App deployed on Heroku](./Assets/app_deployed_on_heroku.png)
+## Walkthrough Video
+
+- [Watch Video]()
 
 ## Deployment / Links
 
-- Project homepage: [Heroku Homepage](https://radiant-meadow-11834.herokuapp.com/)
+- Project Repository: [GitHub](https://github.com/ThomWilliams/employee-tracker-tew)
 
-- Repository: [GitHub](https://github.com/ThomWilliams/note-taker-tew)
+- Issue tracker: [GitHub Issues](https://github.com/ThomWilliams/employee-tracker-tew/issues)
 
-- Issue tracker: [GitHub Issues](https://github.com/ThomWilliams/note-taker-tew/issues)
-
-- Application has also been deployed to Heroku. 
 
 ## License
   
