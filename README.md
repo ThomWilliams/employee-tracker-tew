@@ -66,7 +66,7 @@ thomwilliams1990@gmail.com
 
 ## Walkthrough Video
 
-- [Watch Video]()
+- [Watch Video](https://drive.google.com/file/d/1XZ8hIfcwywpOyK1Msj6XpY0rqC4S1EgC/view?usp=sharing)
 
 ## Deployment / Links
 

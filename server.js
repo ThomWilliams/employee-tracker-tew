@@ -268,7 +268,6 @@ const viewEmployeeData = () => {
   start();
 };
 
-
 // UPDATE Employee Roles ID 
 const updateEmployeeRoles = () => {
   let employeeID;
