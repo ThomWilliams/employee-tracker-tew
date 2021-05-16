@@ -82,7 +82,7 @@ const addData = () => {
           addRolesData();
           break;
 
-        case "Add employee data":
+        case "Add employees":
           addEmployeeData();
           break;
 
@@ -91,7 +91,7 @@ const addData = () => {
           break;
 
         default:
-          console.log(`Invalid action: ${answer.table}`);
+          console.log(`Invalid action: ${answer.addTable}`);
           break;
       }
     });
@@ -162,45 +162,50 @@ const addRolesData = () => {
 
 // ADD EMPLOYEE DATA INQUIRER
 const addEmployeeData = () => {
-  inquirer
-    .prompt(
-      {
-        name: "first_name",
-        type: "input",
-        message: "Please enter the First Name of the Employee",
-      },
-      {
-        name: "last_name",
-        type: "input",
-        message: "Please enter the Last Name of the Employee",
-      },
-      {
-        name: "roles_id",
-        type: "list",
-        choices() {},
-
-        message: "Please enter the ID for this Employee role",
-      }
-    )
-    .then((answer) => {
-      connection.query(
-        "INSERT INTO employees SET ?",
+  connection.query("SELECT * FROM roles", (err, results) => {
+    if (err) throw err;
+    inquirer
+      .prompt([
         {
-          first_name: answer.employeeFirstName,
-          last_name: answer.employeeLastName,
-          roles_id: answer.employeeRolesID,
-          manager_id: answer.employeeManagerID,
+          name: "first_name",
+          type: "input",
+          message: "Please enter the First Name of the Employee",
         },
-        (err, res) => {
+        {
+          name: "last_name",
+          type: "input",
+           message: "Please enter the Last Name of the Employee",
+        },
+        {
+          name: "roles_id",
+          type: "list",
+          choices() {
+            return results.map(({ id, title }) => {
+              return { name: title, value: id };
+            });
+          },
+          message: "Please select the Roles ID",
+        }, 
+        {
+          name: "manager_id",
+          type: "input",
+          message: "Please enter the ID of the manager",
+        },
+      ]
+      )
+      .then((answer) => {
+        connection.query("INSERT INTO employees SET ?", answer, (err, res) => {
           if (err) throw err;
           console.log("Employees data Added to Database!");
-
           // re-prompt the user if they want to go through options again
           start();
-        }
-      );
-    });
+        });
+      });
+  });
 };
+
+
+
 
 // VIEW / READ TABLE DATA SELECTOR
 
@@ -312,31 +317,6 @@ const updateEmployeeRoles = () => {
 
 }
 
-// UPDATE EMPOYEE ROLES ID
-// const updateEmployeeRoles = () => {
-//   connection.query('SELECT * FROM employees', (err, results) => {
-//     if (err) throw err;
-//   inquirer.prompt({
-//     name: 'updateEmployees',
-//     type: 'rawlist',
-//   choices() {
-//   const choiceArray = [];
-//   results.forEach(({ roles_id }) => {
-//     choiceArray.push(roles_id);
-//   });
-//   return choiceArray;
-//   },
-//  message: 'What would you like to update the role ID to?',
-//   },
-//   {
-//     name:
-//   }
-
-//   .then((answer) => {
-
-//     }node
-//   });
-// };
 
 start();
 
